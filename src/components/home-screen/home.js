@@ -32,8 +32,8 @@ export default class Home extends Component {
 }
 
 const styles = StyleSheet.create({
-  top_panel: { backgroundColor: "#42f4df", width: "100%", flex: 2 },
-  main_Panel: { backgroundColor: "#ddd", width: "100%", flex: 8 },
+  top_panel: { backgroundColor: "#42f4df", width: "100%", flex: 1 },
+  main_Panel: { backgroundColor: "#ddd", width: "100%", flex: 10 },
   bottom: {
     backgroundColor: "#42f4df",
     width: "100%",
