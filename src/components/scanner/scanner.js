@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import {
   AppRegistry,
-  StyleSheet,
   Text,
   TouchableOpacity,
-  View
+  View,
+  StyleSheet
 } from "react-native";
 import { Camera, Permissions } from "expo";
 
@@ -13,7 +13,12 @@ export default class Scanner extends Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back
   };
-
+  // async componentWillReceiveProps(nextProps) {
+  //   console.log("here");
+  // }
+  clicked() {
+    console.log("clicked");
+  }
   async componentWillMount() {
     const { status } = await Permissions.askAsync(Permissions.CAMERA);
     this.setState({ hasCameraPermission: status === "granted" });
@@ -24,14 +29,18 @@ export default class Scanner extends Component {
     if (hasCameraPermission === null) {
       return <View />;
     } else if (hasCameraPermission === false) {
-      console.log("No Permission");
       return <Text>No access to camera</Text>;
     } else {
-      console.log("Has Permission");
       return (
         <View style={{ flex: 1 }}>
-          <Camera style={{ flex: 1 }} type={this.state.type}>
-            <View
+          <Camera
+            style={styles.camera}
+            type={this.state.type}
+            ref={ref => {
+              this.camera = ref;
+            }}
+          >
+            {/* <View
               style={{
                 flex: 1,
                 backgroundColor: "transparent",
@@ -60,13 +69,17 @@ export default class Scanner extends Component {
                   Flip{" "}
                 </Text>
               </TouchableOpacity>
-            </View>
+            </View> */}
           </Camera>
         </View>
       );
     }
   }
 }
+
+const styles = StyleSheet.create({
+  camera: { flex: 1 }
+});
 
 // export default class Scanner extends Component {
 //   render() {
